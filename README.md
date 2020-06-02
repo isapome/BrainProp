@@ -1,8 +1,9 @@
-# BrainProp
-_A biologically plausible learning rule that can train deep neural networks on image-classification tasks (MNIST, CIFAR10, CIFAR100, Tiny ImageNet)._ 
+# Training deep networks on MNIST, CIFAR10, CIFAR100 and Tiny ImageNet with BrainProp
+
+_Implementation of BrainProp, a biologically plausible learning rule that can train deep neural networks on image-classification tasks (MNIST, CIFAR10, CIFAR100, Tiny ImageNet)._ 
 
 
-# My Paper Title
+# BrainProp: How the brain can implement reward-based error backpropagation
 
 This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation" (https://arxiv.org/abs/{...}). 
 
@@ -11,10 +12,10 @@ This repository is the official implementation of "BrainProp: How the brain can 
 
 ## Requirements
 
-Python 3.6.6
-pip 20.1.1
-CUDA 10.1.243
-cuDNN 7.6.5.32
+* Python 3.6.6
+* pip 20.1.1
+* CUDA 10.1.243
+* cuDNN 7.6.5.32
 
 To install the required libraries and modules:
 
