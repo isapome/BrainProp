@@ -1,9 +1,9 @@
-# Training deep networks on MNIST, CIFAR10, CIFAR100 and Tiny ImageNet with BrainProp
+# Training deep networks with a biologically plausible learning rule
 
 _Implementation of BrainProp, a biologically plausible learning rule that can train deep neural networks on image-classification tasks (MNIST, CIFAR10, CIFAR100, Tiny ImageNet)._ 
 
 
-# BrainProp: How the brain can implement reward-based error backpropagation
+## BrainProp: How the brain can implement reward-based error backpropagation
 
 This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation" (https://arxiv.org/abs/{...}). 
 
@@ -11,6 +11,8 @@ This repository is the official implementation of "BrainProp: How the brain can 
 
 
 ## Requirements
+
+The current version of the code requires a recent (as of June 2020) version of tensorflow-gpu, CUDA and cuDNN and it was specifically tested on the following versions of the packages:
 
 * Python 3.6.6
 * pip 20.1.1
@@ -23,7 +25,12 @@ To install the required libraries and modules:
 pip install -r Requirements.txt
 ```
 
-Datasets: MNIST, CIFAR10 and CIFAR100 are available through keras. Tiny Imagenet needs to be extracted and prepared. 
+#### Datasets
+* MNIST, CIFAR10 and CIFAR100 are available through keras. 
+* Tiny ImageNet needs to be downloaded and extracted: 
+```tinyimagenet
+python tinyimagenet.py
+```
 
 
 ## Training
