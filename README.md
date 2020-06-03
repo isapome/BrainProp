@@ -5,7 +5,10 @@ _Implementation of BrainProp, a biologically plausible learning rule that can tr
 
 ## BrainProp: How the brain can implement reward-based error backpropagation
 
-This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation" (https://arxiv.org/abs/{...}). 
+This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation".
+<!--- (https://arxiv.org/abs/{...}) --->
+In the paper we show that by training only one output unit at a time we obtain a biologically plausible learning rule able to train deep neural networks on state-of-the-art machine learning classification tasks. The architectures we used range from 3 to 8 hidden layers. For the more shallow 
+
 
 > 📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
 
@@ -27,19 +30,34 @@ pip install -r Requirements.txt
 
 #### Datasets
 * MNIST, CIFAR10 and CIFAR100 are available through keras. 
-* Tiny ImageNet needs to be downloaded and extracted: 
+* Tiny ImageNet needs to be extracted by running: 
 ```tinyimagenet
 python tinyimagenet.py
 ```
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in the directory where the file "tiny-imagenet-200.zip" is located.
 
 ## Training
 
 To train the model(s) in the paper, run this command:
 
 ```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
+python main.py <input_file.py>
 ```
+
+The input files included allow to train models on:
+
+* 3 fully connected layers:
+  * MNIST: *inputs_MNIST.py*
+* 2 locally connected layers and 1 fully connected layer:
+  * MNIST: *inputs_loccon_MNIST.py*
+  * CIFAR10: *inputs_loccon_C10.py*
+  * CIFAR100: *inputs_loccon_C100.py*
+* 7 convolutional layers and 1 fully connected layer:
+  * CIFAR10: *inputs_C10.py*
+  * CIFAR100: *inputs_C100.py*
+  * Tiny ImageNet: *inputs_TIN.py*
+
+All the hyperparameters (as specified in the paper) are included in the input files. 
 
 > 📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
 
