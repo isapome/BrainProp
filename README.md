@@ -7,10 +7,10 @@ _Implementation of BrainProp, a biologically plausible learning rule that can tr
 
 This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation".
 <!--- (https://arxiv.org/abs/{...}) --->
-In the paper we show that by training only one output unit at a time we obtain a biologically plausible learning rule able to train deep neural networks on state-of-the-art machine learning classification tasks. The architectures we used range from 3 to 8 hidden layers. For the more shallow 
+In the paper we show that by training only one output unit at a time we obtain a biologically plausible learning rule able to train deep neural networks on state-of-the-art machine learning classification tasks. The architectures used range from 3 to 8 hidden layers.
 
 
-> 📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
+<!---  📋Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials --->
 
 
 ## Requirements
@@ -36,14 +36,15 @@ python tinyimagenet.py
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in the directory where the file "tiny-imagenet-200.zip" is located.
 
-## Training
+## Training and Evaluation
 
 To train the model(s) in the paper, run this command:
 
 ```train
 python main.py <input_file.py>
 ```
-
+ the training will stop when the validation accuracy has not increased for 45 epochs.
+ 
 The input files included allow to train models on:
 
 * 3 fully connected layers:
@@ -59,18 +60,15 @@ The input files included allow to train models on:
 
 All the hyperparameters (as specified in the paper) are included in the input files. 
 
-> 📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
+<!---  📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters. --->
 
 
-## Evaluation
-
+<!---## Evaluation
 To evaluate my model on ImageNet, run:
-
 ```eval
 python eval.py --model-file mymodel.pth --benchmark imagenet
 ```
-
-> 📋Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
+> 📋Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).--->
 
 
 ## Pre-trained Models
@@ -87,15 +85,14 @@ You can download pretrained models here:
 Our model achieves the following performance on :
 
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+<!--- ### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet) --->
 
 | Model name         | Top 1 Accuracy  | Top 5 Accuracy |
 | ------------------ |---------------- | -------------- |
 | My awesome model   |     85%         |      95%       |
 
-> 📋Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
+<!--- 📋Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. --->
 
 
-## Contributing
-
-> 📋Pick a licence and describe how to contribute to your code repository. 
+<!--- ## Contributing
+> 📋Pick a licence and describe how to contribute to your code repository. --->
