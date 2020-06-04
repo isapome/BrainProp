@@ -41,7 +41,7 @@ python tinyimagenet.py
 To train the model(s) in the paper, run this command:
 
 ```train
-python main.py <input_file.py>
+python main.py <input_file>
 ```
  the training will stop when the validation accuracy has not increased for 45 epochs.
  
