@@ -1,4 +1,4 @@
-# Training deep networks with a biologically plausible learning rule
+# Training deep networks with a biologically plausible algorithm
 
 _Implementation of BrainProp, a biologically plausible learning rule that can train deep neural networks on image-classification tasks (MNIST, CIFAR10, CIFAR100, Tiny ImageNet)._ 
 
@@ -30,7 +30,7 @@ pip install -r Requirements.txt
 
 #### Datasets
 * MNIST, CIFAR10 and CIFAR100 are available through keras. 
-* Tiny ImageNet needs to be extracted by running: 
+* Tiny ImageNet can be downloaded from the [official page of the challenge](https://tiny-imagenet.herokuapp.com) or extracted by running: 
 ```tinyimagenet
 python tinyimagenet.py
 ```
