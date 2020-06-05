@@ -88,6 +88,8 @@ Some pre-trained models are included. Specifically networks trained with BrainPr
 
 ## Results
 
+All the experiments ran on one node of a NVIDIA GeForce 1080Ti card.
+
 Our algorithm achieved the following performances (averaged over 10 different seeds, the mean and standard deviation are indicated):
 <!--- ### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet) --->
 
