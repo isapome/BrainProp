@@ -43,7 +43,13 @@ To train the model(s) in the paper, run this command:
 ```train
 python main.py <input_file>
 ```
- the training will stop when the validation accuracy has not increased for 45 epochs.
+ the training will stop when the validation accuracy has not increased for 45 epochs, otherwise until 500 epochs are reached.
+ 
+If the parameter `save_weights` is set to `True`, an h5 file with the weights will be saved and its name will be added to the input file. The model can then be evaluated by doing:
+ 
+ ```eval
+ python main.py <input_file> -l
+ ```
  
 The input files included allow to train models on:
 
@@ -73,23 +79,26 @@ python eval.py --model-file mymodel.pth --benchmark imagenet
 
 ## Pre-trained Models
 
-You can download pretrained models here:
+Some pre-trained models are included. Specifically networks trained with BrainProp with the deep architecture on CIFAR10, CIFAR100 and Tiny ImageNet.
 
+<!--- You can download pretrained models here:
 - [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
-
-> 📋Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
+> 📋Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models. --->
 
 
 ## Results
 
-Our model achieves the following performance on :
-
-
+Our model achieves the following performance (averaged over 10 different seeds, the mean and standard deviation are indicated):
 <!--- ### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet) --->
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
-| ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
+| BrainProp            |  Top 1 Accuracy [%] |
+|  ------------------  |  ----------------   |
+| MNIST - dense        |     98.68(0.07)     |
+| CIFAR10 - deep       |     88.88(0.27)     | 
+| CIFAR100 - deep      |     59.58(0.46)     |
+| Tiny ImageNet - deep |     47.50(1.30)     |
+
+For the complete tables and figures, please refer to the paper. 
 
 <!--- 📋Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. --->
 
