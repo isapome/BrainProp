@@ -88,15 +88,17 @@ Some pre-trained models are included. Specifically networks trained with BrainPr
 
 ## Results
 
-Our model achieves the following performance (averaged over 10 different seeds, the mean and standard deviation are indicated):
+Our algorithm achieved the following performances (averaged over 10 different seeds, the mean and standard deviation are indicated):
 <!--- ### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet) --->
 
-| BrainProp            |  Top 1 Accuracy [%] |
-|  ------------------  |  ----------------   |
-| MNIST - dense        |     98.68(0.07)     |
-| CIFAR10 - deep       |     88.88(0.27)     | 
-| CIFAR100 - deep      |     59.58(0.46)     |
-| Tiny ImageNet - deep |     47.50(1.30)     |
+| BrainProp            |  Top 1 Accuracy [%] |  Epochs [#]  | Seconds/Epoch |
+|  ------------------  |  ----------------   |  ----------- | ------------- |
+| MNIST - `conv`        |     99.31(0.04)     |    63(18)    | 3  |
+| CIFAR10 - `deep`       |     88.88(0.27)     |    105(4)    | 8  |
+| CIFAR100 - `deep`      |     59.58(0.46)     |    218(22)   | 8  |
+| Tiny ImageNet - `deep` |     47.50(1.30)     |    328(75)   | 47 |
+
+For the `dense` and `conv` simulations the speed was 3s/epoch, while for `loccon` the speed ranged between 45- and 60s/epoch.
 
 For the complete tables and figures, please refer to the paper. 
 
