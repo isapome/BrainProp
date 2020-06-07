@@ -2,7 +2,7 @@
 """ BrainProp implementation.
 Usage:
 python main.py <dataset> <architecture> <algorithm>
-Use the optional argument -s -l to load weights (specify the file name)
+Use the optional argument -s to save training outputs or -l to load weights (specify the file name)
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
