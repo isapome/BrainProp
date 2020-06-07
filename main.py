@@ -15,7 +15,8 @@ import numpy as np
 import pickle
 import datetime
 
-#zeropath = os.path.expanduser('~')+"/isabella/pre_trained_models/"
+
+#initialization
 zeropath = ''
 
 import argparse
@@ -38,7 +39,14 @@ else:
 
 tic_all = datetime.datetime.now()
 
+
 def import_from_path(module_name, file_path=None):
+    """Import the other python files as modules
+    
+    Keyword arguments:
+    module_name -- the name of the python file (with extension)
+    file_path -- path to the file if not in the current directory (default: None)
+    """
     if not file_path:
         if module_name.endswith('.py'):
             file_path = module_name
@@ -74,6 +82,8 @@ seed = 1
 np.random.seed(seed)
 tf.random.set_seed(seed)
 
+#initialization ends, next: loading and preprocessing the dataset
+
 tic_preprocessing = datetime.datetime.now()
 
 if dataset == 'TinyImageNet':
@@ -107,7 +117,7 @@ toc_preprocessing = datetime.datetime.now()
 
 print("Preprocessing, elapsed: {} seconds.".format((toc_preprocessing - tic_preprocessing).seconds))
 
-
+#preparing architecture
 if learning_algorithm == 'EBP':
     output_activation_function = 'softmax'
     loss = 'categorical_crossentropy'
@@ -126,6 +136,7 @@ optimizer = optimizers.SGD(learning_rate=learning_rate, momentum=0.)
 model = architecture_selected.get_model(image_shape, output_layer, output_activation_function, n_classes)
 model.summary()
 
+#evaluation or training
 if args.load:
     saved_weights = args.load
     model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
@@ -133,7 +144,6 @@ if args.load:
     model.load_weights(saved_weights)
     
     history = model.evaluate(test_images, test_labels, batch_size=batch_dim, verbose=2)
-    
     
 else:
     model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
@@ -153,6 +163,13 @@ else:
 
 
     def get_filename(type):
+        """Computes the filename for the outputs of the training 
+        (checks whether the file already exists, in that case adds a number to the filename 
+        to avoid overriding it)
+        
+        Keyword arguments:
+        type -- the type of output (plot, history or weights)
+        """
         filename = "{}_{}_{}_{}".format(dataset, architecture, learning_algorithm, type)
         num = 0
         while os.path.isfile(filename):
@@ -160,7 +177,7 @@ else:
             num += 1
         return filename
 
-    if save_plots == True:
+    if save_plots == True: #save a plot of the accuracy as a function of the epochs
         filename_plot = get_filename('accuracy.pdf')
 
         n_epochs = len(history.history['accuracy'])
@@ -185,14 +202,14 @@ else:
         print("Saving the accuracy plot as \'{}\'".format(filename_plot))
         plt.savefig(zeropath+filename_plot, dpi=300, bbox_inches='tight')
 
-    if save_history == True:
+    if save_history == True:  #save the history file of the training (contains accuracy, validation accuracy, epochs, loss)
         filename_history = get_filename('history.pkl')
         print("Saving the history as \'{}\'".format(filename_history))
         with open(zeropath+filename_history, 'wb') as file:
             pickle.dump([dataset, learning_algorithm, history.history], file)
         
         
-    if save_weights == True:
+    if save_weights == True: #save the weights of the trained model (the value they had at the epoch of the best validtion accuracy)
         filename_w = get_filename('weights.h5')
         print("Saving the weights as \'{}\'".format(filename_w))
         model.save_weights(zeropath+filename_w)
