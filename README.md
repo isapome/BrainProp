@@ -41,30 +41,22 @@ python tinyimagenet.py
 To train the model(s) in the paper, run this command:
 
 ```train
-python main.py <input_file>
+python main.py <dataset> <architecture> <algorithm>
 ```
  the training will stop when the validation accuracy has not increased for 45 epochs, otherwise until 500 epochs are reached.
- 
-If the parameter `save_weights` is set to `True`, an h5 file with the weights will be saved and its name will be added to the input file. The model can then be evaluated by doing:
+
+Add the flag `-s` to save a plot of the accuracy, the trained weights (at the best validation accuracy) and the history file of the training. 
+
+To load and evaluate a saved model:
+<!--- If the parameter `save_weights` is set to `True`, an h5 file with the weights will be saved and its name will be added to the input file. The model can then be evaluated by doing: --->
  
  ```eval
- python main.py <input_file> -l
+ python main.py <dataset> <architecture> <algorithm> -l <weightfile>
  ```
  
-The input files included allow to train models on:
+Three pre-trained models (on the deep network with BrainProp) are included on CIFAR10 (`CIFAR10_BrainProp_weights.h5`), CIFAR100 (`CIFAR100_BrainProp_weights.h5`) and Tiny ImageNet (`TIN_BrainProp_weights.h5`)
 
-* 3 fully connected layers:
-  * MNIST: *inputs_MNIST.py*
-* 2 locally connected layers and 1 fully connected layer:
-  * MNIST: *inputs_loccon_MNIST.py*
-  * CIFAR10: *inputs_loccon_C10.py*
-  * CIFAR100: *inputs_loccon_C100.py*
-* 7 convolutional layers and 1 fully connected layer:
-  * CIFAR10: *inputs_C10.py*
-  * CIFAR100: *inputs_C100.py*
-  * Tiny ImageNet: *inputs_TIN.py*
-
-All the hyperparameters (as specified in the paper) are included in the input files. 
+All the hyperparameters (as specified in the paper) are automatically set. 
 
 <!---  📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters. --->
 
