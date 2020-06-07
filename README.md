@@ -44,6 +44,17 @@ To train the model(s) in the paper, run this command:
 python main.py <dataset> <architecture> <algorithm>
 ```
  the training will stop when the validation accuracy has not increased for 45 epochs, otherwise until 500 epochs are reached.
+ 
+The possible `<dataset>` - `<architecture>` combinations are:
+
+* `MNIST` - {`dense`, `loccon`, `conv`}
+* `CIFAR10` - {`loccon`, `conv`, `deep`}
+* `CIFAR100` - {`loccon`, `conv`, `deep`}
+* `TinyImageNet` - `deep`
+
+  For the details of the architectures, please refer to the paper. 
+ 
+For `<algorithm>`, set `BrainProp` for BrainProp or `EBP` for error-backpropagation.
 
 Add the flag `-s` to save a plot of the accuracy, the trained weights (at the best validation accuracy) and the history file of the training. 
 
@@ -51,7 +62,7 @@ To load and evaluate a saved model:
 <!--- If the parameter `save_weights` is set to `True`, an h5 file with the weights will be saved and its name will be added to the input file. The model can then be evaluated by doing: --->
  
  ```eval
- python main.py <dataset> <architecture> <algorithm> -l <weightfile>
+ python main.py <dataset> <architecture> <algorithm> -l <weightfile.h5>
  ```
  
 Three pre-trained models (on the deep network with BrainProp) are included on CIFAR10 (`CIFAR10_BrainProp_weights.h5`), CIFAR100 (`CIFAR100_BrainProp_weights.h5`) and Tiny ImageNet (`TIN_BrainProp_weights.h5`)
@@ -69,9 +80,9 @@ python eval.py --model-file mymodel.pth --benchmark imagenet
 > 📋Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).--->
 
 
-## Pre-trained Models
+ <!--- ## Pre-trained Models --->
 
-Some pre-trained models are included. Specifically networks trained with BrainProp with the deep architecture on CIFAR10, CIFAR100 and Tiny ImageNet.
+ <!--- Some pre-trained models are included. Specifically networks trained with BrainProp with the deep architecture on CIFAR10, CIFAR100 and Tiny ImageNet. --->
 
 <!--- You can download pretrained models here:
 - [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
