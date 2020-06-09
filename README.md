@@ -22,7 +22,7 @@ The current version of the code requires a recent (as of June 2020) version of t
 * CUDA 10.1.243
 * cuDNN 7.6.5.32
 
-To install the required libraries and modules:
+To install the required libraries and modules (after having created a virtual environment with the versions of Python and pip indicated above):
 
 ```setup
 pip install -r Requirements.txt
@@ -65,9 +65,9 @@ To load and evaluate a saved model:
  python main.py <dataset> <architecture> <algorithm> -l <weightfile.h5>
  ```
  
-Three pre-trained models (on the deep network with BrainProp) are included on CIFAR10 (`CIFAR10_BrainProp_weights.h5`), CIFAR100 (`CIFAR100_BrainProp_weights.h5`) and Tiny ImageNet (`TIN_BrainProp_weights.h5`)
+Three pre-trained models (on the deep network with BrainProp) on CIFAR10 (`CIFAR10_BrainProp_weights.h5`), CIFAR100 (`CIFAR100_BrainProp_weights.h5`) and Tiny ImageNet (`TIN_BrainProp_weights.h5`) are included.
 
-All the hyperparameters (as specified in the paper) are automatically set. 
+All the hyperparameters (as specified in the paper) are automatically set depending on which architecture is chosen. 
 
 <!---  📋Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters. --->
 
