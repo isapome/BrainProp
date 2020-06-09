@@ -29,7 +29,7 @@ pip install -r Requirements.txt
 ```
 
 #### Datasets
-* MNIST, CIFAR10 and CIFAR100 are available through keras. 
+* MNIST, CIFAR10 and CIFAR100 are automatically available through keras. 
 * Tiny ImageNet can be downloaded from the [official page of the challenge](https://tiny-imagenet.herokuapp.com) or extracted by running: 
 ```tinyimagenet
 python tinyimagenet.py
@@ -40,7 +40,7 @@ python tinyimagenet.py
 
 To train the model(s) in the paper, run this command:
 
-```train
+```
 python main.py <dataset> <architecture> <algorithm>
 ```
  the training will stop when the validation accuracy has not increased for 45 epochs, otherwise until 500 epochs are reached.
@@ -61,7 +61,7 @@ Add the flag `-s` to save a plot of the accuracy, the trained weights (at the be
 To load and evaluate a saved model:
 <!--- If the parameter `save_weights` is set to `True`, an h5 file with the weights will be saved and its name will be added to the input file. The model can then be evaluated by doing: --->
  
- ```eval
+ ```
  python main.py <dataset> <architecture> <algorithm> -l <weightfile.h5>
  ```
  
@@ -91,7 +91,7 @@ python eval.py --model-file mymodel.pth --benchmark imagenet
 
 ## Results
 
-All the experiments ran on one node of a NVIDIA GeForce 1080Ti card.
+All the experiments ran on one node with a NVIDIA GeForce 1080Ti card.
 
 Our algorithm achieved the following performances (averaged over 10 different seeds, the mean and standard deviation are indicated):
 <!--- ### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet) --->
