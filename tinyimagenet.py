@@ -6,6 +6,9 @@ import numpy as np
 from tqdm import tqdm
 
 class HiddenPrints:
+  """Block printing. Used while loading the Tiny ImageNet images.
+  """
+  
   def __enter__(self):
     self._original_stdout = sys.stdout
     sys.stdout = open(os.devnull, 'w')
@@ -14,11 +17,24 @@ class HiddenPrints:
     sys.stdout = self._original_stdout
     
 def listdir_nohidden(path):
+    """List the directories without including hidden ones.
+
+    Keyword arguments:
+    path -- path at which the directories will be listed.
+    """
+    
     for f in os.listdir(path):
         if not f.startswith('.'):
             yield f
 
 def get_annotations_map(dataset, path):
+  """Get the annotations map for the validation or the test set.
+
+  Keyword arguments:
+  dataset -- string, either validation or test: which split of the dataset to look for.
+  path -- where the tiny-imagenet-200 directory is located. 
+  """
+  
   if dataset == "validation":
     string = "val"
   elif dataset == "test":
@@ -36,6 +52,13 @@ def get_annotations_map(dataset, path):
   
 
 def prepare_tinyimagenet(num_classes=None, path=None):
+  """Takes Tiny ImageNet images from different folders and prepares numpy arrays and labels for training and testing.
+
+  Keyword arguments:
+  num_classes -- number of classes to be taken (default is None, which takes all the 200 classes of the dataset). 
+  path -- where the tiny-imagenet-200 directory is located. 
+  """
+  
   print('Fetching Tiny ImageNet..')
   if path:
     path0 = path
@@ -53,7 +76,6 @@ def prepare_tinyimagenet(num_classes=None, path=None):
   annotations={}
   filelist = [x for x in os.listdir(train_path) if not x.startswith('.')]
   for class_folder in tqdm(iterable=listdir_nohidden(train_path), total=len(filelist)):
-#  for class_folder in listdir_nohidden(train_path):
       images_folder = os.path.join(os.path.join(train_path,class_folder),'images')
       annotations[class_folder]=label
       for image in listdir_nohidden(images_folder):
@@ -96,6 +118,9 @@ def prepare_tinyimagenet(num_classes=None, path=None):
 
 
 def main():
+    """Checks whether a tiny-imagenet-200 directory exists, otherwise it extracts it from the tiny-imagenet-200.zip file.
+    """
+    
     print('Preparing Tiny ImageNet dataset in the current directory')
     foldername = "tiny-imagenet-200"
     filename = "tiny-imagenet-200.zip"
@@ -110,7 +135,8 @@ def main():
                 print("Tiny ImageNet successfully extracted to the current directory.")
         else:
             print("File \'{}\' not found. Please download it to the current directory.".format(filename))
-    
+            
+#uncomment the following line to check whether the script is able to load the images from the extracted directory correctly
 #    train_images, train_labels, test_images, test_labels = prepare_tinyimagenet()
     
 if __name__ == "__main__":
