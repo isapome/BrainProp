@@ -73,8 +73,8 @@ class BrainPropLayer(layers.Layer):
         config = super(BrainPropLayer, self).get_config().copy()
         config.update({
             'output_dim': self.output_dim,
-            'regularizer': self.regularizer,
-            'initializer': self.initializer,
+            'kernel_regularizer': self.regularizer,
+            'kernel_initializer': self.initializer,
         })
 
         return config
