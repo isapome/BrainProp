@@ -6,6 +6,8 @@ from tensorflow.keras import layers, models, regularizers, callbacks, initialize
 import numpy as np
 
 class fetch_model():
+    """Given the dataset and the type of architecure, set the architecture and the hyperparameters for training.
+    """
     def __init__(self, dataset, model):
         """Set the architecture and the hyperparameters for training.
         
