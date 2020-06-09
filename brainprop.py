@@ -8,8 +8,19 @@ from tensorflow.python.ops import array_ops
 
 
 class BrainPropLayer(layers.Layer):
-
+    """BrainBrop output layer, inherits from keras class Layer. For more details, see the paper.
+    """
     def __init__(self, output_dim, activation=None, use_bias=None, kernel_regularizer=None, kernel_initializer=None, **kwargs):
+        """BrainBrop output layer initialization.
+
+        Keyword arguments:
+        output_dim -- dimension of the output (i.e. number of classes the inputs can belong to).
+        activation -- which activation function to use. Default is None and for now only linear activations are implemented.
+        use_bias -- whether to use biases or not. Default is None, which means no biases are gonna be used. Biases not yet implemented. 
+        kernel_regularizer -- which regularization to use. Default is None.
+        kernel_initializer -- which initializer to use for the weights. Default is None (GlorotUniform).
+        """
+        
         super(BrainPropLayer, self).__init__(**kwargs)
         self.output_dim = output_dim
         self.regularizer = kernel_regularizer
@@ -19,6 +30,8 @@ class BrainPropLayer(layers.Layer):
         self.epsilon = 0.02
 
     def build(self, input_shape):
+        """Builds the layer.
+        """
         self.kernel = self.add_weight(name='kernel',
                                       shape=(input_shape[1], self.output_dim),
                                       initializer=self.initializer,#'uniform',
@@ -32,6 +45,11 @@ class BrainPropLayer(layers.Layer):
 
         
     def call(self, x, training=None):
+        """The output of the previous layer is given as an input to this layer. 
+        Training phase: for 98% of the cases the output will be the argmax of the linear activations; 
+        for the remaining 2% a class is selected by passing the output through a maxboltzmann controller.
+        Test phase: the output will be the argmax of the linear activations.
+        """
         if training is None:
             training = K.learning_phase()
         def exploration():
@@ -63,16 +81,32 @@ class BrainPropLayer(layers.Layer):
 
 
 class BrainPropLoss(losses.Loss):
+    """BrainBrop loss.
+    """
     def __init__(self, batch_size, n_classes, replicas, reduction=losses.Reduction.SUM, name='loss', **kwargs):
+        """BrainBrop loss initialization.
+
+        Keyword arguments:
+        batch_size -- the size of a batch.
+        n_classes -- the number of classes.
+        replicas -- over how many GPUs the training is being parallelized. Use 1 for now.
+        reduction -- loss reduction strategy in case of parallelization. 
+        """
         super(BrainPropLoss, self).__init__(reduction=reduction, name=name, **kwargs)
         self.batch_size = batch_size
         self.n_classes = n_classes
         self.replicas = replicas
 
     def call(self, y_true, y_pred):
+        """BrainBrop loss. Create a target tensor that will produce 0 gradients for non-predicted classes, then calculate squared error for the predicted classes.
+
+        Keyword arguments:
+        y_true -- label.
+        y_pred -- prediction.
+        """
         y_true = K.switch(tf.shape(y_true)[-1] == self.n_classes, y_true, tf.squeeze(tf.one_hot(tf.cast(y_true, tf.int32), self.n_classes)))
         selected_classes = tf.where(y_pred!=0, y_pred*(1/y_pred), y_pred)
         labels = tf.where(selected_classes==0, y_pred, y_true)
-        loss = 0.5 * K.square(labels - y_pred) #* tf.cast(self.n_classes, dtype=tf.float32)
+        loss = 0.5 * K.square(labels - y_pred)
         return loss * (1/self.batch_size) * (1/self.replicas)
 
