@@ -2,7 +2,7 @@
 """ BrainProp implementation.
 Usage:
 python main.py <dataset> <architecture> <algorithm>
-Use the optional argument -s to save training outputs or -l to load weights (specify the file name)
+Use the optional argument -s to save training outputs or -l to load weights (specify then the file name)
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -44,7 +44,7 @@ def import_from_path(module_name, file_path=None):
     """Import the other python files as modules
     
     Keyword arguments:
-    module_name -- the name of the python file (with extension)
+    module_name -- the name of the python file (with extension, if file_path is None)
     file_path -- path to the file if not in the current directory (default: None)
     """
     if not file_path:
@@ -72,7 +72,7 @@ if args.save:
     save_history = True
     save_weights = True
 
-architecture_selection = import_from_path('tinyimagenet', file_path=zeropath+"get_architecture.py")
+architecture_selection = import_from_path('get_architecture', file_path=zeropath+"get_architecture.py")
 architecture_selected = architecture_selection.fetch_model(dataset, architecture)
 batch_dim, learning_rate = architecture_selected.get_hyperparams()
 
@@ -117,7 +117,7 @@ toc_preprocessing = datetime.datetime.now()
 
 print("Preprocessing, elapsed: {} seconds.".format((toc_preprocessing - tic_preprocessing).seconds))
 
-#preparing architecture
+#preparing architecture and optimizer depending on the selected learning algorithm
 if learning_algorithm == 'EBP':
     output_activation_function = 'softmax'
     loss = 'categorical_crossentropy'
@@ -136,7 +136,7 @@ optimizer = optimizers.SGD(learning_rate=learning_rate, momentum=0.)
 model = architecture_selected.get_model(image_shape, output_layer, output_activation_function, n_classes)
 model.summary()
 
-#evaluation or training
+#evaluation (if the flag -l was used)/training
 if args.load:
     saved_weights = args.load
     model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
@@ -168,7 +168,7 @@ else:
         to avoid overriding it)
         
         Keyword arguments:
-        type -- the type of output (plot, history or weights)
+        type -- string, the type of output (accuracy.pdf, history.pkl or weights.h5)
         """
         filename = "{}_{}_{}_{}".format(dataset, architecture, learning_algorithm, type)
         num = 0
