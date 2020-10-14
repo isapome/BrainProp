@@ -110,3 +110,6 @@ class BrainPropLoss(losses.Loss):
         loss = 0.5 * K.square(labels - y_pred)
         return loss * (1/self.batch_size) * (1/self.replicas)
 
+    
+    
+    
