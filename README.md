@@ -5,7 +5,7 @@ _Implementation of BrainProp, a biologically plausible learning rule that can tr
 
 ## BrainProp: How the brain can implement reward-based error backpropagation
 
-This repository is the official implementation of "BrainProp: How the brain can implement reward-based error backpropagation".
+This repository is the official implementation of "Attention-Gated Brain Propagation: How the brain can implement reward-based error backpropagation".
 <!--- (https://arxiv.org/abs/{...}) --->
 In the paper we show that by training only one output unit at a time we obtain a biologically plausible learning rule able to train deep neural networks on state-of-the-art machine learning classification tasks. The architectures used range from 3 to 8 hidden layers.
 
