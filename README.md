@@ -25,7 +25,7 @@ The current version of the code requires a recent (as of June 2020) version of t
 To install the required libraries and modules (after having created a virtual environment with the versions of Python and pip indicated above):
 
 ```setup
-pip install -r Requirements.txt
+pip install -r requirements.txt
 ```
 
 #### Datasets
